@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.venv
+backend/.venv
+backend/*.db
+backend/*.db-*
+backend/__pycache__
+backend/**/*.pyc
+backend/.pytest_cache
+frontend/node_modules
+frontend/dist
+**/__pycache__
+**/*.pyc
+**/.pytest_cache

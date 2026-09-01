@@ -1,0 +1,16 @@
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /app/backend
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY backend/ .
+RUN useradd --create-home --uid 10001 soc \
+    && mkdir -p /app/backend/uploads /data/uploads \
+    && chown -R soc:soc /app/backend /data
+USER soc
+
+EXPOSE 8001
+CMD ["gunicorn", "--worker-class", "gthread", "--threads", "100", "--bind", "0.0.0.0:8001", "production:application"]

@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ─────────────────────────────────────────────── */
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.5;
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #0a0e17;
+  color: #e5e7eb;
+}
+
+#root { width: 100%; min-height: 100vh; }
+
+/* ─── Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #2d3748; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #4a5568; }
+
+/* ─── Focus rings ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(139, 92, 246, 0.6);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─── Component Utilities ───────────────────────────────── */
+@layer components {
+
+  /* ── Cards ── */
+  .card {
+    @apply bg-soc-card border rounded-xl p-5;
+    border-color: rgba(255,255,255,0.06);
+    transition: border-color 0.15s;
+  }
+  .card:hover {
+    border-color: rgba(255,255,255,0.09);
+  }
+  .card-sm {
+    @apply bg-soc-card border rounded-lg p-3;
+    border-color: rgba(255,255,255,0.06);
+  }
+
+  /* ── Buttons ── */
+
+  /* Base shared styles — applied via @apply in each variant */
+  .btn-base {
+    @apply inline-flex items-center justify-center gap-1.5 font-medium
+           transition-all duration-150 cursor-pointer select-none
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn-base px-4 py-2 bg-violet-600 hover:bg-violet-500 active:bg-violet-700
+           text-white text-sm rounded-lg shadow-sm shadow-violet-500/20
+           hover:shadow-violet-500/30 hover:-translate-y-px active:translate-y-0;
+  }
+
+  /* Generic .btn alias so pages using btn-primary style don't break */
+  .btn {
+    @apply btn-base px-4 py-2 text-sm rounded-lg;
+  }
+
+  .btn-secondary {
+    @apply btn-base px-3 py-1.5 bg-gray-800 hover:bg-gray-700 active:bg-gray-800
+           text-gray-300 hover:text-gray-100 text-xs rounded-lg border
+           hover:-translate-y-px active:translate-y-0;
+    border-color: rgba(255,255,255,0.08);
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.15); }
+
+  .btn-danger {
+    @apply btn-base px-3 py-1.5 bg-red-600 hover:bg-red-500 active:bg-red-700
+           text-white text-xs rounded-lg shadow-sm shadow-red-500/10
+           hover:-translate-y-px active:translate-y-0;
+  }
+
+  .btn-success {
+    @apply btn-base px-3 py-1.5 bg-green-600 hover:bg-green-500 active:bg-green-700
+           text-white text-xs rounded-lg shadow-sm shadow-green-500/10
+           hover:-translate-y-px active:translate-y-0;
+  }
+
+  .btn-ghost {
+    @apply btn-base px-3 py-1.5 text-gray-400 hover:text-gray-200 text-xs rounded-lg;
+  }
+  .btn-ghost:hover { background-color: rgba(255,255,255,0.05); }
+
+  /* ── Inputs ── */
+  .input {
+    @apply bg-gray-900/80 border text-gray-200 text-sm rounded-lg px-3 py-2
+           outline-none transition-all duration-150
+           placeholder:text-gray-600 w-full;
+    border-color: rgba(255,255,255,0.10);
+  }
+  .input:hover  { border-color: rgba(255,255,255,0.18); }
+  .input:focus  {
+    border-color: rgba(139, 92, 246, 0.65);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+  }
+
+  .input-sm {
+    @apply bg-gray-900/80 border text-gray-200 text-xs rounded-lg px-2.5 py-1.5
+           outline-none transition-all;
+    border-color: rgba(255,255,255,0.10);
+  }
+  .input-sm:focus { border-color: rgba(139,92,246,0.65); }
+
+  select.input, select.input-sm { @apply cursor-pointer; }
+
+  /* ── Badges ── */
+  .badge {
+    @apply text-[10px] font-semibold px-2 py-0.5 rounded uppercase tracking-wide
+           inline-flex items-center gap-1;
+  }
+  .badge-critical {
+    @apply badge text-red-400 border;
+    background-color: rgba(239,68,68,0.12);
+    border-color: rgba(239,68,68,0.28);
+  }
+  .badge-high {
+    @apply badge text-orange-400 border;
+    background-color: rgba(249,115,22,0.12);
+    border-color: rgba(249,115,22,0.28);
+  }
+  .badge-medium {
+    @apply badge text-yellow-400 border;
+    background-color: rgba(234,179,8,0.12);
+    border-color: rgba(234,179,8,0.28);
+  }
+  .badge-low {
+    @apply badge text-blue-400 border;
+    background-color: rgba(59,130,246,0.12);
+    border-color: rgba(59,130,246,0.28);
+  }
+  .badge-info {
+    @apply badge text-green-400 border;
+    background-color: rgba(34,197,94,0.12);
+    border-color: rgba(34,197,94,0.28);
+  }
+
+  /* ── Terminal ── */
+  .terminal {
+    @apply font-mono text-[11px] leading-relaxed rounded-lg border;
+    background-color: rgba(0,0,0,0.45);
+    border-color: rgba(255,255,255,0.05);
+  }
+
+  /* ── Stat card ── */
+  .stat-card { @apply card flex flex-col gap-3; }
+
+  /* ── Section header ── */
+  .section-header { @apply text-sm font-semibold text-gray-300 flex items-center gap-2; }
+
+  /* ── Divider ── */
+  .divider { @apply border-t my-4; border-color: rgba(255,255,255,0.05); }
+
+  /* ── Status pills ── */
+  .status-new {
+    @apply text-[10px] px-2 py-0.5 rounded-full text-red-400 border font-medium;
+    background-color: rgba(239,68,68,0.10);
+    border-color: rgba(239,68,68,0.22);
+  }
+  .status-investigating {
+    @apply text-[10px] px-2 py-0.5 rounded-full text-yellow-400 border font-medium;
+    background-color: rgba(234,179,8,0.10);
+    border-color: rgba(234,179,8,0.22);
+  }
+  .status-resolved {
+    @apply text-[10px] px-2 py-0.5 rounded-full text-green-400 border font-medium;
+    background-color: rgba(34,197,94,0.10);
+    border-color: rgba(34,197,94,0.22);
+  }
+  .status-false-positive {
+    @apply text-[10px] px-2 py-0.5 rounded-full text-gray-400 border font-medium;
+    background-color: rgba(107,114,128,0.10);
+    border-color: rgba(107,114,128,0.22);
+  }
+  .status-escalated {
+    @apply text-[10px] px-2 py-0.5 rounded-full text-purple-400 border font-medium;
+    background-color: rgba(139,92,246,0.10);
+    border-color: rgba(139,92,246,0.22);
+  }
+
+  /* ── Severity row left border ── */
+  .sev-border-critical { @apply border-l-2 border-red-500; }
+  .sev-border-high     { @apply border-l-2 border-orange-500; }
+  .sev-border-medium   { @apply border-l-2 border-yellow-500; }
+  .sev-border-low      { @apply border-l-2 border-blue-500; }
+  .sev-border-info     { @apply border-l-2 border-green-500; }
+
+  /* ── Glow ring for critical ── */
+  .ring-critical { box-shadow: 0 0 0 1px rgba(239,68,68,0.30); }
+
+  /* ── Page heading ── */
+  .page-title {
+    @apply text-2xl font-bold text-white tracking-tight;
+  }
+  .page-subtitle {
+    @apply text-sm text-gray-400 mt-0.5;
+  }
+}
+
+/* ─── Animations ────────────────────────────────────────── */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.35); }
+  50%       { box-shadow: 0 0 16px 5px rgba(239,68,68,.08); }
+}
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position:  200% 0; }
+}
+
+.animate-fade-in   { animation: fade-in   .3s ease-out both; }
+.animate-slide-in  { animation: slide-in  .25s ease-out both; }
+.animate-pulse-red { animation: pulse-red 2.2s ease-in-out infinite; }
+
+/* ─── Skeleton loading ──────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #1f2937 25%, #2d3748 50%, #1f2937 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 6px;
+}

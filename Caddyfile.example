@@ -1,0 +1,21 @@
+# Replace these hostnames with your real DNS names.
+# Caddy obtains and renews HTTPS certificates automatically.
+soc.example.com {
+    root * /srv/ai-soc-dashboard/frontend/dist
+    encode gzip
+
+    # Keep the API private behind the TLS proxy.
+    handle /api/* {
+        reverse_proxy 127.0.0.1:8001
+    }
+
+    # Flask-SocketIO requires WebSocket upgrade forwarding.
+    handle /socket.io/* {
+        reverse_proxy 127.0.0.1:8001
+    }
+
+    handle {
+        try_files {path} /index.html
+        file_server
+    }
+}
