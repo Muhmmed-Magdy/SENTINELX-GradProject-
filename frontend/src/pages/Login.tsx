@@ -43,11 +43,11 @@ export default function Login({ onLogin }: LoginProps) {
     }
   }
 
-  const fill = (acc: typeof DEMO_ACCOUNTS[0]) => {
-    setEmail(acc.email)
-    setPassword(acc.password)
-    setError('')
-  }
+    const fill = (acc: typeof DEMO_ACCOUNTS[0]) => {
+        setEmail(acc.email)
+        setPassword('')
+        setError('')
+    }
 
   return (
     <div className="min-h-screen bg-soc-bg flex items-center justify-center p-4"

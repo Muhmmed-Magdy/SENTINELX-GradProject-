@@ -1,3 +1,6 @@
+# Visual Studio
+.vs/
+**/.vs/
 # Secrets and local configuration
 .env
 .env.*

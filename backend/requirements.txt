@@ -11,3 +11,5 @@ python-dotenv==1.2.2
 gunicorn==23.0.0; platform_system != "Windows"
 openai>=1.30.0,<2.0.0
 werkzeug>=3.0.0
+
+scikit-learn==1.9.1
